@@ -1,5 +1,5 @@
 //
-//  ad.swift
+//  AdModel.swift
 //  webscraping olx
 //
 //  Created by Felipe C. Araujo on 10/02/25.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Ad: Identifiable, Codable {
+struct AdModel: Identifiable, Codable {
     let id: String
     let title: String
     let price: Double

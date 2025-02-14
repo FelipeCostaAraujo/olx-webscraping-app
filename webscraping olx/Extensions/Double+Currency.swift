@@ -12,7 +12,6 @@ extension Double {
         let formatter = NumberFormatter()
         formatter.locale = Locale(identifier: "pt_BR")
         formatter.numberStyle = .currency
-        // Define para não exibir casas decimais, se não forem necessárias
         formatter.maximumFractionDigits = 0
         return formatter.string(from: NSNumber(value: self)) ?? "R$\(self)"
     }

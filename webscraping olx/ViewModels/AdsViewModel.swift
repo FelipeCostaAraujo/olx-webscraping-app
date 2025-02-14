@@ -9,13 +9,12 @@ import Foundation
 import SwiftUI
 
 class AdsViewModel: ObservableObject {
-    @Published var ads: [Ad] = []
+    @Published var ads: [AdModel] = []
     @Published var isLoading: Bool = true
     @Published var errorMessage: String? = nil
     
     @Published var filterSuperPrice: Bool = UserDefaults.standard.bool(forKey: "filterSuperPrice")
     @Published var filterRecent: Bool = UserDefaults.standard.bool(forKey: "filterRecent")
-    // Se o valor salvo for "none", não incluirá nenhum parâmetro de preço
     @Published var priceOrder: String = UserDefaults.standard.string(forKey: "priceOrder") ?? "none"
     @Published var selectedCategory: String = UserDefaults.standard.string(forKey: "selectedCategory") ?? "all"
     
@@ -34,7 +33,7 @@ class AdsViewModel: ObservableObject {
         var params = [String]()
         if filterSuperPrice { params.append("superPrice=true") }
         if filterRecent { params.append("recent=true") }
-        // Se o usuário escolheu uma ordem de preço diferente de "none", adiciona o parâmetro "price"
+        
         if priceOrder != "none" {
             params.append("price=\(priceOrder)")
         }
@@ -66,7 +65,7 @@ class AdsViewModel: ObservableObject {
                     return
                 }
                 do {
-                    let ads = try JSONDecoder().decode([Ad].self, from: data)
+                    let ads = try JSONDecoder().decode([AdModel].self, from: data)
                     self.ads = ads
                 } catch {
                     self.errorMessage = error.localizedDescription
